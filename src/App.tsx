@@ -2,6 +2,7 @@ import { Route, BrowserRouter, Routes } from "react-router-dom";
 import "./App.css";
 import Forms from "./components/Forms";
 import InfoCompradorForm from "./pagamento/InfoCompradorForm";
+import EnderecoForm from "./pagamento/EnderecoForm";
 // import './Form.css'
 function App() {
   return (
@@ -10,8 +11,8 @@ function App() {
         <BrowserRouter>
          <div className="app">
           <Routes>
-            <Route path="/" Component={InfoCompradorForm} />
-            <Route path="/forms" Component={Forms} />
+            <Route path="/" Component={EnderecoForm} />
+            <Route path="/forms" Component={InfoCompradorForm} />
           </Routes>
       </div>
 
