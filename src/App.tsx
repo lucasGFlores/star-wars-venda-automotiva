@@ -3,7 +3,8 @@ import "./App.css";
 import Forms from "./components/Forms";
 import InfoCompradorForm from "./pagamento/InfoCompradorForm";
 import EnderecoForm from "./pagamento/EnderecoForm";
-// import './Form.css'
+
+import Pagamento from "./pagamento/Pagamento";
 function App() {
   return (
     <>
@@ -13,6 +14,7 @@ function App() {
           <Routes>
             <Route path="/" Component={EnderecoForm} />
             <Route path="/forms" Component={InfoCompradorForm} />
+            <Route path="/pagamento" Component={Pagamento} />
           </Routes>
       </div>
 

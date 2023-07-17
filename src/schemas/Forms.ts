@@ -62,3 +62,16 @@ export const formSchemaEndereco = yup.object().shape({
   bairro: yup.string().required("insira o bairro"),
   complemento: yup.string(),
 });
+
+export const pagamentoCartaoSchema = yup.object().shape({
+  numero: yup.string().required("insira o numero do cartão").min(16, "numero invalido"),
+  validade: yup.string().required("insira data de validade").min(7,"data invalida, fala").test('validade', "data invalida",
+  (value : string) => {
+  const [ month, year] = value.split("/"); 
+  const date = new Date(`${year}-${month}-01`);
+  const dataAtual = new Date();
+  return date instanceof Date  && date > dataAtual;
+  }),
+  name: yup.string().required("insira o nome"),
+  cvv: yup.string().required("insira o cvv").min(3, "cvv invalido"),
+}) 

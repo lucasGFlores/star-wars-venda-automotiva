@@ -10,9 +10,20 @@ const EnderecoForm = (): JSX.Element => {
   const formatCEP = (cep: string) => {
     // Lógica de formatação do CEP
     // Por exemplo: 12345678 -> 12345-678
-    return cep.replace(/^(\d{5})(\d{3})$/, "$1-$2");
+    const cleanedcep = cep.replace(/\D/g, "");
+    const matchcep = cleanedcep.match(/^(\d{5})(\d{3})$/);
+    if (matchcep)
+    return  `${matchcep[1]}-${matchcep[2]}`;
+
+    if(cep.length === 8 && cep.includes("-")){
+      const newcep = cep.replace("-","");
+      return newcep;
+    }
+    if(cep.length >9){
+      return cep.slice(0,-1);}
   };
   
+
   return (
     <div className="container">
       <Formik
@@ -26,14 +37,6 @@ const EnderecoForm = (): JSX.Element => {
           numero: "",
           complemento: "",
         }}
-        //      initialErrors={{
-        //       bairro: "insira o bairro",
-        // cep: "cep invalido",
-        // cidade: "insira a cidade",
-        // estado: "insira o estado",
-        // numero: "insira o numero",
-        // rua: "insira a rua",
-        //      }}
         validationSchema={formSchemaEndereco}
         onSubmit={(values, actions) => {
           console.log(values);
@@ -70,7 +73,7 @@ const EnderecoForm = (): JSX.Element => {
               name="cep"
               type="text"
               component={CustomInput}
-              format={formatCEP}
+       
               label="cep"
             />
             <div style={{ display: "flex" }}>
@@ -129,10 +132,10 @@ const EnderecoForm = (): JSX.Element => {
             <div style={{ display: "flex" }}>
               <div
                 className="minContent"
-                style={{ marginLeft: "20px", marginRight: "50px" }}
+                style={{ marginLeft: "10px", marginRight: "60px" }}
               >
                 <Field
-                  style={{ width: "60px" }}
+                  style={{ width: "80px" }}
                   name="numero"
                   type="text"
                   component={CustomInput}
@@ -149,6 +152,7 @@ const EnderecoForm = (): JSX.Element => {
                 />
               </div>
             </div>
+            <button disabled={props.isSubmitting} className="submit" type="submit">Enviar</button>
           </Form>
         )}
       </Formik>

@@ -1,10 +1,15 @@
 .container{
+   
+
 background-color: #1B1725;
 border: 2px solid #FFD829;
+outline: 1px solid #e9b015;
+outline-offset: 15px;
 border-radius: 15px;
 width: 100%;
 height: 100%;
 display: flex;
+flex-direction: column;
 justify-content: center;
 
 
@@ -38,7 +43,7 @@ padding: 5px;
 padding-left: 8px;
 /* border-color: #C287AE;#570C2C */
 border-radius: 12px;
-border: 2px solid #C287AE;
+border: 3px solid #C287AE;
 outline: none;
 }
 
@@ -69,6 +74,15 @@ background-color: #44346D;
 border: 3px solid #C287AE;
 border-radius: 12px;
 text-align: center;
+}
+
+
+.select.selected{
+    background-color: #C287AE;
+border: 3px solid #BF7481;
+}
+button.select:hover{
+    outline-offset: -10px;
 }
 .submit{
     background-color: #543A58;
