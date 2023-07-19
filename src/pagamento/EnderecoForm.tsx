@@ -1,33 +1,39 @@
-import { observer } from "mobx-react";
-import { Field, Formik, Form, validateYupSchema } from "formik";
-import * as yup from "yup";
+import { Field, Formik, Form } from "formik";
+
 import { formSchemaEndereco } from "../schemas/Forms";
+import espaco from "../image/espaco.png";
 import { Endereco } from "../model/Endereco";
 import CustomInput from "../components/CustomInput";
-import { json } from "react-router-dom";
+import "../styles/Forms.css";
+import { observer } from "mobx-react";
+import controlerForm from "../Controlers/ControlerForm";
+import { set } from "mobx";
+interface EnderecoFormProps {
+  pagina: number;
+  setPagina: React.Dispatch<React.SetStateAction<number>>;
+}
+const EnderecoForm = ({pagina, setPagina} : EnderecoFormProps): JSX.Element => {
+document.body.classList.add('background-style');
 
-const EnderecoForm = (): JSX.Element => {
   const formatCEP = (cep: string) => {
     // Lógica de formatação do CEP
     // Por exemplo: 12345678 -> 12345-678
     const cleanedcep = cep.replace(/\D/g, "");
     const matchcep = cleanedcep.match(/^(\d{5})(\d{3})$/);
-    if (matchcep)
-    return  `${matchcep[1]}-${matchcep[2]}`;
+    if (matchcep) return `${matchcep[1]}-${matchcep[2]}`;
 
-    if(cep.length === 8 && cep.includes("-")){
-      const newcep = cep.replace("-","");
+    if (cep.length === 8 && cep.includes("-")) {
+      const newcep = cep.replace("-", "");
       return newcep;
     }
-    if(cep.length >9){
-      return cep.slice(0,-1);}
+    if (cep.length > 9) {
+      return cep.slice(0, -1);
+    }
   };
-  
 
   return (
-    <div className="container">
+    
       <Formik
-       
         initialValues={{
           cep: "",
           cidade: "",
@@ -49,31 +55,31 @@ const EnderecoForm = (): JSX.Element => {
             values.numero,
             values.complemento
           );
+            setPagina(pagina! + 1)
         }}
       >
         {(props) => (
           <Form>
             <Field
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              const cep = e.target.value;
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                const cep = e.target.value;
                 props.setFieldValue("cep", formatCEP(cep));
-              if (cep.length === 8) {
-                console.log("fetching cep");
-               
-                fetch(`https://viacep.com.br/ws/${cep}/json/`)
-                  .then((res) => res.json())
-                  .then((data) => {
-                    props.setFieldValue("cidade", data.localidade);
-                    props.setFieldValue("estado", data.uf);
-                    props.setFieldValue("rua", data.logradouro);
-                    props.setFieldValue("bairro", data.bairro);
-                  });
-              }
-            }}
+                if (cep.length === 8) {
+                  console.log("fetching cep");
+
+                  fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then((res) => res.json())
+                    .then((data) => {
+                      props.setFieldValue("cidade", data.localidade);
+                      props.setFieldValue("estado", data.uf);
+                      props.setFieldValue("rua", data.logradouro);
+                      props.setFieldValue("bairro", data.bairro);
+                    });
+                }
+              }}
               name="cep"
               type="text"
               component={CustomInput}
-       
               label="cep"
             />
             <div style={{ display: "flex" }}>
@@ -152,11 +158,17 @@ const EnderecoForm = (): JSX.Element => {
                 />
               </div>
             </div>
-            <button disabled={props.isSubmitting} className="submit" type="submit">Enviar</button>
+            <button
+              disabled={props.isSubmitting}
+              className="submit"
+              type="submit"
+            >
+              Enviar
+            </button>
           </Form>
         )}
       </Formik>
-    </div>
+   
   );
 };
 export default EnderecoForm;

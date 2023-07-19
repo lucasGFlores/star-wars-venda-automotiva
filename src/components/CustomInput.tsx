@@ -15,21 +15,21 @@ const CustomInput: FC<CustomInputProps & FieldProps> = ({
   type = "text",
   ...props
 }) => {
-
   return (
-    <div>
+    <div className="minContent">
       <label>{label}</label>
       <input
-        
         type={type}
         {...field}
         {...props}
         className={touched[field.name] && errors[field.name] ? "error" : ""}
       />
       {touched[field.name] && errors[field.name] ? (
-        <p style={{textAlign:"center"}} className="error">{errors[field.name]?.toString()}</p>
+        <p style={{ textAlign: "center", padding:"2px 2px" }} className="error">
+          {errors[field.name]?.toString()}
+        </p>
       ) : (
-      ""
+        ""
       )}
     </div>
   );

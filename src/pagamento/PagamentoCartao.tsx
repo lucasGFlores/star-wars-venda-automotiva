@@ -1,9 +1,13 @@
-import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Field, Form, Formik } from "formik";
 import { pagamentoCartaoSchema } from "../schemas/Forms";
-import DatePicker from "react-datepicker";
 import CustomInput from "../components/CustomInput";
-import boleto from "../image/boleto.png"
-const PagamentoCartao = () => {
+import "../styles/Forms.css"
+
+interface PagamentoCartaoProps {
+  pagina: number;
+  setPagina: React.Dispatch<React.SetStateAction<number>>;
+}
+const PagamentoCartao = ({pagina,setPagina}: PagamentoCartaoProps) => {
   const formatDate = (date: string) => {
     console.log(date);
 
@@ -35,76 +39,75 @@ const PagamentoCartao = () => {
     }
   };
   return (
-    <div className="container">
-      <div style={{display:"flex", justifyContent:"center"}}>
-        <button className={"select"} style={{padding:0,width:"100px",height:"80px"}}><img width={70} src={boleto}/></button>
-        <button />
-      </div>
-      <Formik
-        initialValues={{
-          numero: "",
-          name: "",
-          validade: "",
-          cvv: "",
-        }}
-        validationSchema={pagamentoCartaoSchema}
-        onSubmit={(values, actions) => {}}
-      >
-        {(props) => (
-          <Form>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                margin: "10px",
-              }}
-            >
-              <div style={{ display: "flex", marginBottom: "30px" }}>
+    <Formik
+      initialValues={{
+        numero: "",
+        name: "",
+        validade: "",
+        cvv: "",
+      }}
+      validationSchema={pagamentoCartaoSchema}
+      onSubmit={(values, actions) => {
+        actions.resetForm;
+        setPagina(pagina + 1);
+      }}
+    >
+      {(props) => (
+        <Form>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              margin: "10px",
+            }}
+          >
+            <div style={{ display: "flex", marginBottom: "30px" }}>
+              <div style={{ marginRight: "30px" }}>
                 <Field
-                  style={{ marginRight: "30px" }}
                   name="numero"
                   label="Numero do cartão"
                   type="text"
                   component={CustomInput}
                 />
-                <Field
-                  style={{ width: "65px" }}
-                  name="validade"
-                  label="validade"
-                  type="text"
-                  component={CustomInput}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    const validade = event.target.value;
-                    props.setFieldValue("validade", formatDate(validade));
-                  }}
-                />
               </div>
-              <div style={{ display: "flex" }}>
+              <Field
+                style={{ width: "65px" }}
+                name="validade"
+                label="validade"
+                type="text"
+                component={CustomInput}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  const validade = event.target.value;
+                  props.setFieldValue("validade", formatDate(validade));
+                }}
+              />
+            </div>
+            <div style={{ display: "flex" }}>
+              <div style={{ marginRight: "50px" }}>
                 <Field
-                  style={{ marginRight: "50px" }}
                   name="name"
                   label="Nome impresso no cartão"
                   type="text"
                   component={CustomInput}
                 />
-
-                <Field
-                  style={{ width: "35px" }}
-                  name="cvv"
-                  label="CVV"
-                  type="text"
-                  component={CustomInput}
-                  onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    const cvv = event.target.value;
-                    props.setFieldValue("cvv", formatCVV(cvv));
-                  }}
-                />
               </div>
+              <Field
+                style={{ width: "45px" }}
+                name="cvv"
+                label="CVV"
+                type="text"
+                component={CustomInput}
+                onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                  const cvv = event.target.value;
+                  props.setFieldValue("cvv", formatCVV(cvv));
+                }}
+              />
             </div>
-          </Form>
-        )}
-      </Formik>
-    </div>
+          </div>
+        <button style={{width:"160px", height:"40px", padding:"5px",marginTop:"15px", marginBottom:"15px"}} className="select">Enviar</button>
+        </Form>
+      )}
+    </Formik>
   );
 };
 export default PagamentoCartao;

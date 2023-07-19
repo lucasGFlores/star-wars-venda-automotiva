@@ -1,25 +1,28 @@
 import { Route, BrowserRouter, Routes } from "react-router-dom";
 import "./App.css";
-import Forms from "./components/Forms";
+import espaco from "./image/espaco.png";
 import InfoCompradorForm from "./pagamento/InfoCompradorForm";
 import EnderecoForm from "./pagamento/EnderecoForm";
-
+import "./styles/Forms.css"
 import Pagamento from "./pagamento/Pagamento";
+import FormDeCompra from "./pagamento/FormDeCompra";
+import TelaMain from "./TelaDeCompra/TelaMain";
 function App() {
+  
+  // ReactDOM.render(<img src={espaco} width={"100%"}></img>, document.body);
   return (
-    <>
-     
-        <BrowserRouter>
-         <div className="app">
+    <BrowserRouter>
+      {/* <div className="backgroud" style={{width:"1200"}}> */}
+    
+        <div className="app">
           <Routes>
-            <Route path="/" Component={EnderecoForm} />
-            <Route path="/forms" Component={InfoCompradorForm} />
-            <Route path="/pagamento" Component={Pagamento} />
-          </Routes>
-      </div>
 
-        </BrowserRouter>
-    </>
+            <Route path="/" Component={TelaMain} />
+            <Route path="/tudo" Component={FormDeCompra} />
+          </Routes>
+        {/* </div> */}
+      </div>
+    </BrowserRouter>
   );
 }
 
