@@ -7,7 +7,14 @@ const TelaMain = () => {
     <>
       <CampoDeBusca />
 
-      <div style={{ width: "100%", overflowX: "auto", whiteSpace: "nowrap",marginTop:"200px" }}>
+      <div
+        style={{
+          width: "100%",
+          overflowX: "auto",
+          whiteSpace: "nowrap",
+          marginTop: "200px",
+        }}
+      >
         <SlidingContainer>
           {/* Aqui você pode colocar o conteúdo que deseja deslizar */}
           <div
@@ -123,7 +130,7 @@ const TelaMain = () => {
           </div>
           <div
             style={{
-        
+              flexShrink: 0,
               width: "300px",
               height: "200px",
               marginRight: "10px",
