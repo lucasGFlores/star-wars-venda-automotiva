@@ -1,0 +1,32 @@
+body {
+  background-color: #1b1725;
+}
+
+div#root {
+  width: 100%;
+}
+
+input {
+  margin: 0;
+  background-color: none;
+  border: none;
+  outline: none;
+}
+.busca {
+  font-size: large;
+  height: 30px;
+  width: 100%;
+  padding: 5px;
+  border-radius: 12px;
+  background-color: #373144;
+  outline: none;
+}
+.campo-de-busca {
+  display: flex;
+  width: 70%;
+  margin: auto;
+  background-color: #373144;
+  border: 2px solid #eee8e8;
+  border-radius: 12px;
+  padding: 5px 10px;
+}

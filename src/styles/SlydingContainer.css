@@ -1,0 +1,19 @@
+.containerSlyding {
+  width: 100%;
+  overflow-x: scroll;
+  white-space: nowrap;
+}
+
+.content {
+  display: inline-block;
+  /* Adicione o tamanho e margem desejados para cada item do conteúdo */
+  width: 300px;
+  height: 200px;
+  margin-right: 10px;
+}
+/* Para ocultar a aparência padrão do scroll */
+::-moz-scrollbar,
+::-webkit-scrollbar,
+::-ms-scrollbar {
+  width: 0.5rem; /* Largura do scrollbar */
+}

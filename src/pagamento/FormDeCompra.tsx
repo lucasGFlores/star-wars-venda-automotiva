@@ -3,10 +3,8 @@ import { useState } from "react";
 import InfoCompradorForm from "./InfoCompradorForm";
 import EnderecoForm from "./EnderecoForm";
 import Pagamento from "./Pagamento";
-import { observer } from "mobx-react";
-import controlerForm from "../Controlers/ControlerForm";
-import { set } from "mobx";
 import EstrelasNavigator from "../components/EstrelasNavigator";
+
 const FormDeCompra = () => {
   const [pagina, setPagina] = useState(0);
   return (
@@ -17,6 +15,8 @@ const FormDeCompra = () => {
           paddingTop: "30px",
           paddingLeft: "20px",
           paddingRight: "20px",
+          margin:"auto",
+          overflow:"visible"
         }}
       >
         {
