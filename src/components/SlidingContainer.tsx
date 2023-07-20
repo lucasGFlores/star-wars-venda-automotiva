@@ -1,5 +1,7 @@
 import React, { ReactNode, useRef, useState } from "react";
+import { useSpring, animated } from "react-spring";
 import "../styles/SlydingContainer.css";
+
 interface SlidingContainerProps {
   children: ReactNode;
 }
@@ -15,11 +17,12 @@ const SlidingContainer = ({ children }: SlidingContainerProps): ReactNode => {
     weithFromOneChild: number;
     weithFromAllChildren: number;
   } => {
-    if (!containerRef.current) return {
-      qntChildren: 0,
-      weithFromOneChild: 0,
-      weithFromAllChildren:0
-    };
+    if (!containerRef.current)
+      return {
+        qntChildren: 0,
+        weithFromOneChild: 0,
+        weithFromAllChildren: 0,
+      };
     const childrenList: HTMLCollection = containerRef.current?.children;
     const qntChildren = childrenList.length;
     const weithFromOneChild = childrenList[0].clientWidth;
@@ -29,7 +32,7 @@ const SlidingContainer = ({ children }: SlidingContainerProps): ReactNode => {
       },
       0
     );
-    return {qntChildren,weithFromOneChild,weithFromAllChildren};
+    return { qntChildren, weithFromOneChild, weithFromAllChildren };
   };
 
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -52,23 +55,26 @@ const SlidingContainer = ({ children }: SlidingContainerProps): ReactNode => {
     const x = e.pageX - (containerRef.current?.offsetLeft ?? 0);
     const walk = (x - startX) * 2.5; // Ajuste a sensibilidade do deslizamento conforme necessário
     containerRef.current.scrollLeft = scrollLeft - walk;
-    
-    console.log("handleMouseMove", e.pageX, `\n${scrollLeft}`, childrenWeith());
+  };
+
+  const handleButtonClick = () => {
+    console.log(containerRef.current.scrollLeft);
+    if (!containerRef.current) return;
+    const newScrollLeft =
+      containerRef.current.scrollLeft + childrenWeith().weithFromOneChild * 4;
+
+      
+    // Use JavaScript puro para fazer a animação de scroll suave
+    containerRef.current.scrollTo({
+      left: newScrollLeft > 2400 ? 0 : newScrollLeft,
+      behavior: "smooth",
+    });
   };
 
   return (
     <>
-      <button
-        onClick={() =>{
-          if(!containerRef.current)return;
-          containerRef.current.scrollLeft = containerRef.current.scrollLeft + childrenWeith().weithFromOneChild
-        }
-        }
-      >
-        {" "}
-        botones
-      </button>
-      <div
+      <button onClick={handleButtonClick}>Avançar 4 elementos</button>
+      <animated.div
         className="containerSlyding"
         ref={containerRef}
         onMouseDown={handleMouseDown}
@@ -82,7 +88,7 @@ const SlidingContainer = ({ children }: SlidingContainerProps): ReactNode => {
         }}
       >
         {children}
-      </div>
+      </animated.div>
     </>
   );
 };
