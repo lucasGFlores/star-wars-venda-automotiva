@@ -1,5 +1,5 @@
 import React, { ReactNode, useRef, useState } from "react";
-import { useSpring, animated } from "react-spring";
+import {  animated } from "react-spring";
 import "../styles/SlydingContainer.css";
 
 interface SlidingContainerProps {
@@ -58,7 +58,6 @@ const SlidingContainer = ({ children }: SlidingContainerProps): ReactNode => {
   };
 
   const handleButtonClick = () => {
-    console.log(containerRef.current.scrollLeft);
     if (!containerRef.current) return;
     const newScrollLeft =
       containerRef.current.scrollLeft + childrenWeith().weithFromOneChild * 4;
@@ -66,14 +65,14 @@ const SlidingContainer = ({ children }: SlidingContainerProps): ReactNode => {
       
     // Use JavaScript puro para fazer a animação de scroll suave
     containerRef.current.scrollTo({
-      left: newScrollLeft > 2400 ? 0 : newScrollLeft,
+      left: newScrollLeft,
       behavior: "smooth",
     });
   };
 
   return (
     <>
-      <button onClick={handleButtonClick}>Avançar 4 elementos</button>
+      <button style={{marginBottom:"60px"}} onClick={handleButtonClick}>Avançar 4 elementos</button>
       <animated.div
         className="containerSlyding"
         ref={containerRef}

@@ -1,5 +1,0 @@
-const ElementoAutomovel = () => {
-     <div>
-        
-     </div>
-}
