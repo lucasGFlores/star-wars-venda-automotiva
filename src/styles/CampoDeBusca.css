@@ -4,6 +4,8 @@ body {
 
 div#root {
   width: 100%;
+   height: 615px;
+
 }
 
 input {

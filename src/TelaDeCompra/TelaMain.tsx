@@ -24,16 +24,17 @@ const Tela = observer(() => {
       <div
         style={{
           width: "100%",
-          overflowX: "auto",
-          whiteSpace: "nowrap",
-          marginTop: "200px",
+          // overflowX: "auto",
+          // whiteSpace: "nowrap",
+          // margin:"0"
+      
         }}
       >
         {store.automoveis.length > 0 ? (
           <SlidingContainer>
-            {/* Aqui você pode colocar o conteúdo que deseja deslizar */}
             
-              {store.automoveis.map((automovel) => (
+              {store.buscarAutomoveis().map((automovel) => (
+
                 <ElementoAutomovel
                   key={automovel.url}
                   fabricante={automovel.fabricante}
@@ -44,12 +45,9 @@ const Tela = observer(() => {
                   preco={automovel.preco}
                 />
               ))}
-           
-
-            {/* E assim por diante */}
           </SlidingContainer>
         ) : (
-          <div style={{ textAlign: "center" }}>
+          <div style={{ textAlign: "center", marginTop:"200px" }}>
             <h1>Carregando...</h1>
           </div>
         )}
@@ -59,7 +57,4 @@ const Tela = observer(() => {
 });
 
 export default TelaMain;
-function componentWillMount() {
-  throw new Error("Function not implemented.");
-}
 

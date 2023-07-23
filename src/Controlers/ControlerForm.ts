@@ -38,7 +38,7 @@ class Store {
     this.automoveis.push(auto);
   }
   buscarAutomoveis(): Automovel[] {
-    return this.automoveis.filter((auto) => auto.nome === this.filtro);
+    return this.automoveis.filter((auto) => auto.nome.toLowerCase().includes(this.filtro));
   }
 
   set filtroAutomovel(filtro: string) {

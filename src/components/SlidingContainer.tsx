@@ -1,16 +1,27 @@
-import React, { ReactNode, useRef, useState } from "react";
+import React, { CSSProperties, Children, ReactElement, ReactNode, useRef, useState } from "react";
 import {  animated } from "react-spring";
 import "../styles/SlydingContainer.css";
 
 interface SlidingContainerProps {
-  children: ReactNode;
+  children: ReactElement<any, string | React.JSXElementConstructor<any>>[];
+  style?: CSSProperties; //para conseguir definir o style do container
 }
 
-const SlidingContainer = ({ children }: SlidingContainerProps): ReactNode => {
+const SlidingContainer = ({ children,style }: SlidingContainerProps): ReactNode => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
+
+  if(!children) return null; //caso não tenha nenhum filho, retorna null
+
+
+  // Adiciona um elemento vazio no inicio e no final da lista de filhos (não usado)
+ const childrenArray =  React.Children.toArray(children) as ReactElement<any, string | React.JSXElementConstructor<any>>[];
+  childrenArray[0] = React.cloneElement(childrenArray[0], {
+    style: { ...childrenArray[0].props.style, marginLeft: "20px" },
+  });
+  // ------------------------------------------------
 
   const childrenWeith = (): {
     qntChildren: number;
@@ -35,6 +46,7 @@ const SlidingContainer = ({ children }: SlidingContainerProps): ReactNode => {
     return { qntChildren, weithFromOneChild, weithFromAllChildren };
   };
 
+  //função para lidar com o evento de click do mouse
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setIsMouseDown(true);
     setStartX(e.pageX - (containerRef.current?.offsetLeft ?? 0));
@@ -59,11 +71,9 @@ const SlidingContainer = ({ children }: SlidingContainerProps): ReactNode => {
 
   const handleButtonClick = () => {
     if (!containerRef.current) return;
-    const newScrollLeft =
+    let newScrollLeft =
       containerRef.current.scrollLeft + childrenWeith().weithFromOneChild * 4;
-
-      
-    // Use JavaScript puro para fazer a animação de scroll suave
+newScrollLeft = newScrollLeft > containerRef.current.scrollWidth ? 0: newScrollLeft;
     containerRef.current.scrollTo({
       left: newScrollLeft,
       behavior: "smooth",
@@ -72,7 +82,9 @@ const SlidingContainer = ({ children }: SlidingContainerProps): ReactNode => {
 
   return (
     <>
-      <button style={{marginBottom:"60px"}} onClick={handleButtonClick}>Avançar 4 elementos</button>
+      <button style={{ marginBottom: "60px" }} onClick={handleButtonClick}>
+        Avançar 4 elementos
+      </button>
       <animated.div
         className="containerSlyding"
         ref={containerRef}
@@ -81,12 +93,17 @@ const SlidingContainer = ({ children }: SlidingContainerProps): ReactNode => {
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
         style={{
+          width: "100%",
           overflow: "hidden",
           display: "flex",
           alignItems: "flex-start",
         }}
       >
-        {children}
+        {children.map((child: ReactNode) => (
+          <>
+            {child} <div style={style ? style : { margin: "20px 20px" }} />
+          </>
+        ))}
       </animated.div>
     </>
   );

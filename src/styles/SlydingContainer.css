@@ -1,7 +1,6 @@
 .containerSlyding {
   width: 100%;
-  overflow-x: scroll;
-  white-space: nowrap;
+  /* overflow-x: scroll; */
  
 }
 
