@@ -23,27 +23,27 @@ const SlidingContainer = ({ children,style }: SlidingContainerProps): ReactNode 
   });
   // ------------------------------------------------
 
-  const childrenWeith = (): {
+  const childrenWidth = (): {
     qntChildren: number;
-    weithFromOneChild: number;
-    weithFromAllChildren: number;
+    widthFromOneChild: number;
+    widthFromAllChildren: number;
   } => {
     if (!containerRef.current)
       return {
         qntChildren: 0,
-        weithFromOneChild: 0,
-        weithFromAllChildren: 0,
+        widthFromOneChild: 0,
+        widthFromAllChildren: 0,
       };
     const childrenList: HTMLCollection = containerRef.current?.children;
     const qntChildren = childrenList.length;
-    const weithFromOneChild = childrenList[0].clientWidth;
-    const weithFromAllChildren = Array.from(childrenList).reduce(
+    const widthFromOneChild = childrenList[1].clientWidth;
+    const widthFromAllChildren = Array.from(childrenList).reduce(
       (acc, child) => {
         return acc + child.clientWidth;
       },
       0
     );
-    return { qntChildren, weithFromOneChild, weithFromAllChildren };
+    return { qntChildren, widthFromOneChild, widthFromAllChildren };
   };
 
   //função para lidar com o evento de click do mouse
@@ -72,7 +72,7 @@ const SlidingContainer = ({ children,style }: SlidingContainerProps): ReactNode 
   const handleButtonClick = () => {
     if (!containerRef.current) return;
     let newScrollLeft =
-      containerRef.current.scrollLeft + childrenWeith().weithFromOneChild * 4;
+      containerRef.current.scrollLeft + childrenWidth().widthFromOneChild * 4;
 newScrollLeft = newScrollLeft > containerRef.current.scrollWidth ? 0: newScrollLeft;
     containerRef.current.scrollTo({
       left: newScrollLeft,
@@ -99,9 +99,10 @@ newScrollLeft = newScrollLeft > containerRef.current.scrollWidth ? 0: newScrollL
           alignItems: "flex-start",
         }}
       >
-        {children.map((child: ReactNode) => (
+        {children.map((child: ReactNode, indx : number) => (
           <>
-            {child} <div style={style ? style : { margin: "20px 20px" }} />
+         { indx === 0 ? <div style={style ? style :{ margin: "20px 10px" }} /> : null}
+            {child} <div style={style ? style : { margin: "20px 10px" }} />
           </>
         ))}
       </animated.div>
