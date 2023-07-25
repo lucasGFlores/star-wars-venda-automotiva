@@ -8,6 +8,7 @@ const CampoDeBusca = observer(() => {
         className="busca"
         type="text"
         value={store.filtro}
+        
         onChange={(e) => store.filtro = (e.target.value)}
         placeholder="O que você está procurando?"
       />

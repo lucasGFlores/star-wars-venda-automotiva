@@ -31,6 +31,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   height: 100%;
+    background-image: linear-gradient(180deg, #720E53 0%, #570C2C 30%,#310618 60%,#240412 80%,#16020A 90%);
+
 }
 
 h1 {
@@ -46,6 +48,7 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
+  
   cursor: pointer;
   transition: border-color 0.25s;
 }

@@ -44,13 +44,18 @@ class Store {
   set filtroAutomovel(filtro: string) {
     this.filtro = filtro;
   }
+  removerDuplicatas(){
+    this.automoveis = this.automoveis.filter((auto, index, self) =>
+      index === self.findIndex((t) => (
+        t.nome === auto.nome
+      ))
+    )
+  }
   async fetherAutomovel() {
     const auto = await fetch("https://swapi.dev/api/vehicles/")
       .then((res) => res.json())
       .then((res) => res.results);
-    console.log(auto);
     auto.forEach((auto: any) => {
-      console.log(auto);
       this.adicionarAutomovel(
         new Automovel(
           auto.manufacturer,
@@ -63,6 +68,7 @@ class Store {
         )
       );
     });
+    this.removerDuplicatas();
   }
   componentWillMount() {
     store.fetherAutomovel();

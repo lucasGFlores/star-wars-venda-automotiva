@@ -1,3 +1,4 @@
+import imagem from "../autImages/Sand Crawler.jpeg"
 const ElementoAutomovel = (
   {fabricante, nome, modelo, tipo, velocidade, preco,style}:
 {  fabricante: string,
@@ -8,26 +9,35 @@ const ElementoAutomovel = (
   preco: string
   style?: React.CSSProperties}
 ) => {
+ const IMAGEM_SAND_CRAWLER = '../autImages/Sand Crawler.jpeg';
+
   return (
     <div
+      key={nome}
       style={{
         flexShrink: 0,
         borderRadius: "17px",
         backgroundColor: "#F0EBF4",
         height: "400px",
         width: "350px",
-       
+
         textAlign: "center",
         paddingLeft: "0",
-        ...style
+        ...style,
       }}
     >
+      <img
+        style={{ marginTop: "5px", borderRadius: "15px" }}
+        src={"../autImages/Sand Crawler.jpeg"}
+        width={"220px"}
+        height={"100px"}
+      />
       <p
         style={{
-          width:"80%",
+          width: "80%",
           overflow: "hidden",
           whiteSpace: "pre-wrap",
-        marginTop: "10px",
+          marginTop: "18px",
           wordBreak: "normal",
           color: "#534B62",
           fontWeight: "bold",

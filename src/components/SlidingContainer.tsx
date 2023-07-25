@@ -1,26 +1,30 @@
-import React, { CSSProperties, Children, ReactElement, ReactNode, useRef, useState } from "react";
+import React, { CSSProperties, ReactElement, ReactNode, useRef, useState } from "react";
 import {  animated } from "react-spring";
 import "../styles/SlydingContainer.css";
 
 interface SlidingContainerProps {
   children: ReactElement<any, string | React.JSXElementConstructor<any>>[];
   style?: CSSProperties; //para conseguir definir o style do container
+  styleSpaceBtween?: CSSProperties; //para conseguir definir o style do espaço entre os elementos filhos
 }
 
-const SlidingContainer = ({ children,style }: SlidingContainerProps): ReactNode => {
+const SlidingContainer = ({
+  children,
+  styleSpaceBtween,
+  style
+}: SlidingContainerProps): ReactNode => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
 
-  if(!children) return null; //caso não tenha nenhum filho, retorna null
-
+  if (!children) return null; //caso não tenha nenhum filho, retorna null
 
   // Adiciona um elemento vazio no inicio e no final da lista de filhos (não usado)
- const childrenArray =  React.Children.toArray(children) as ReactElement<any, string | React.JSXElementConstructor<any>>[];
-  childrenArray[0] = React.cloneElement(childrenArray[0], {
-    style: { ...childrenArray[0].props.style, marginLeft: "20px" },
-  });
+  //  const childrenArray =  React.Children.toArray(children) as ReactElement<any, string | React.JSXElementConstructor<any>>[];
+  //   childrenArray[0] = React.cloneElement(childrenArray[0], {
+  //     style: { ...childrenArray[0].props.style, marginLeft: "20px" },
+  //   });
   // ------------------------------------------------
 
   const childrenWidth = (): {
@@ -73,7 +77,8 @@ const SlidingContainer = ({ children,style }: SlidingContainerProps): ReactNode 
     if (!containerRef.current) return;
     let newScrollLeft =
       containerRef.current.scrollLeft + childrenWidth().widthFromOneChild * 4;
-newScrollLeft = newScrollLeft > containerRef.current.scrollWidth ? 0: newScrollLeft;
+    newScrollLeft =
+      newScrollLeft > containerRef.current.scrollWidth ? 0 : newScrollLeft;
     containerRef.current.scrollTo({
       left: newScrollLeft,
       behavior: "smooth",
@@ -81,8 +86,16 @@ newScrollLeft = newScrollLeft > containerRef.current.scrollWidth ? 0: newScrollL
   };
 
   return (
-    <>
-      <button style={{ marginBottom: "60px" }} onClick={handleButtonClick}>
+    <div style={style}>
+      <button
+        style={{
+          marginBottom: "8px",
+          marginTop: "8px",
+          marginLeft: "80%",
+          width: "15%",
+        }}
+        onClick={handleButtonClick}
+      >
         Avançar 4 elementos
       </button>
       <animated.div
@@ -99,14 +112,20 @@ newScrollLeft = newScrollLeft > containerRef.current.scrollWidth ? 0: newScrollL
           alignItems: "flex-start",
         }}
       >
-        {children.map((child: ReactNode, indx : number) => (
+        {children.map((child: ReactNode, indx: number) => (
           <>
-         { indx === 0 ? <div style={style ? style :{ margin: "20px 10px" }} /> : null}
-            {child} <div style={style ? style : { margin: "20px 10px" }} />
+            {indx === 0 ? (
+              <div
+                style={
+                  styleSpaceBtween ? styleSpaceBtween : { margin: "20px 10px" }
+                }
+              />
+            ) : null}
+            {child} <div style={styleSpaceBtween ? styleSpaceBtween : { margin: "20px 10px" }} />
           </>
         ))}
       </animated.div>
-    </>
+    </div>
   );
 };
 
