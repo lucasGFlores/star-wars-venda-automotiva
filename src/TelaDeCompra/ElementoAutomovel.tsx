@@ -1,7 +1,11 @@
 import imagem from "../autImages/Sand Crawler.jpeg";
 import "../styles/cardElement.css";
 import { CSSProperties } from "react";
+import sand from "../autImages/Sand Crawler.jpeg"
+import store from "../Controlers/ControlerForm";
+import {}
 const ElementoAutomovel = ({
+  url,
   fabricante,
   nome,
   modelo,
@@ -11,6 +15,7 @@ const ElementoAutomovel = ({
   style,
   className,
 }: {
+  url:string,
   fabricante: string;
   nome: string;
   modelo: string;
@@ -20,15 +25,26 @@ const ElementoAutomovel = ({
   style?: React.CSSProperties;
   className?: string;
 }) => {
-  const IMAGEM_SAND_CRAWLER = "../autImages/Sand Crawler.jpeg";
  const animation = style?.MozAnimation
   return (
     <div
+      onClick={() => {
+        store.setAutomovelSelecionado({
+          fabricante,
+          nome,
+          modelo,
+          tipo,
+          velocidade,
+          preco,
+          url,
+        });
+        
+      }}
       className={`card ${className ? className : ""}`}
       style={{
         position: "relative",
         padding: "0",
-        animation,
+        
       }}
     >
       <div className="bordered-shape">
@@ -46,8 +62,8 @@ const ElementoAutomovel = ({
           }}
         >
           <img
-            style={{ marginTop: "5px", borderRadius: "15px" }}
-            src={"../autImages/Sand Crawler.jpeg"}
+            style={{ marginTop: "5px", borderRadius: "15px",marginLeft:"2px" }}
+            src={sand}
             width={"190px"}
             height={"90px"}
           />

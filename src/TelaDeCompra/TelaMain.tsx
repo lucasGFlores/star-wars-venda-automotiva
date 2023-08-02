@@ -13,12 +13,12 @@ class TelaMain extends Component {
     await store.fetherAutomovel();
   }
   render() {
+    console.log(store.automovelSelecionado);
     return <Tela />;
   }
 }
 const Tela = observer(() => {
 
-  console.log(store.automoveis);
   return (
     <>
       <img className="logo" src={logo} />
@@ -54,6 +54,7 @@ const Tela = observer(() => {
                   animation: `aparecer ${index * 720}ms ease-in-out`,
                 }}
                 key={automovel.url}
+                url={automovel.url}
                 fabricante={automovel.fabricante}
                 nome={automovel.nome}
                 modelo={automovel.modelo}

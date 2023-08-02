@@ -31,6 +31,7 @@ class Automovel {
 class Store {
   automoveis: Automovel[] = [];
   filtro: string = "";
+  automovelSelecionado: Automovel | null = null;
   constructor() {
     makeAutoObservable(this);
   }
@@ -38,18 +39,19 @@ class Store {
     this.automoveis.push(auto);
   }
   buscarAutomoveis(): Automovel[] {
-    return this.automoveis.filter((auto) => auto.nome.toLowerCase().includes(this.filtro));
+    return this.automoveis.filter((auto) =>
+      auto.nome.toLowerCase().includes(this.filtro)
+    );
   }
 
   set filtroAutomovel(filtro: string) {
     this.filtro = filtro;
   }
-  removerDuplicatas(){
-    this.automoveis = this.automoveis.filter((auto, index, self) =>
-      index === self.findIndex((t) => (
-        t.nome === auto.nome
-      ))
-    )
+  removerDuplicatas() {
+    this.automoveis = this.automoveis.filter(
+      (auto, index, self) =>
+        index === self.findIndex((t) => t.nome === auto.nome)
+    );
   }
   async fetherAutomovel() {
     const auto = await fetch("https://swapi.dev/api/vehicles/")
@@ -70,9 +72,37 @@ class Store {
     });
     this.removerDuplicatas();
   }
-  componentWillMount() {
-    store.fetherAutomovel();
+  // componentWillMount() {
+  //   store.fetherAutomovel();
+  // }
+   setAutomovelSelecionado({
+    fabricante,
+    nome,
+    modelo,
+    tipo,
+    velocidade,
+    preco,
+    url,
+  }: {
+    fabricante: string;
+    nome: string;
+    modelo: string;
+    tipo: string;
+    velocidade: string;
+    preco: string;
+    url: string;
+  })  {
+    this.automovelSelecionado = new Automovel(
+      fabricante,
+      nome,
+      modelo,
+      tipo,
+      velocidade,
+      preco,
+      url
+      );
   }
 }
+
 const store = new Store();
 export default  store;

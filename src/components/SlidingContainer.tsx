@@ -115,16 +115,17 @@ const SlidingContainer = ({
           marginTop: "8px",
           marginLeft: "95%",
           aspectRatio: "1/1",
-          width: "40px",
+          width: "34px",
           borderRadius: "50%",
           padding: "0px",
+          paddingLeft: "1px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
         }}
         onClick={handleButtonClick}
       >
-        <FaArrowCircleRight size={25} />
+        <FaArrowCircleRight size={24} />
       </button>
       <animated.div
         className={`containerSlyding ${className ? className : ""}`}
