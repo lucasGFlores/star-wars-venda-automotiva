@@ -2,7 +2,7 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-   height: 100%;
+  height: 100%;
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
 
@@ -31,8 +31,8 @@ body {
   min-width: 320px;
   min-height: 100vh;
   height: 100%;
-    background-image: linear-gradient(180deg, #720E53 0%, #570C2C 30%,#310618 60%,#240412 80%,#16020A 90%);
-
+  background-image: url(../image/espaco.png);
+  
 }
 
 h1 {
@@ -48,7 +48,7 @@ button {
   font-weight: 500;
   font-family: inherit;
   background-color: #1a1a1a;
-  
+
   cursor: pointer;
   transition: border-color 0.25s;
 }

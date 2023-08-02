@@ -1,17 +1,24 @@
 import React, { CSSProperties, ReactElement, ReactNode, useRef, useState } from "react";
 import {  animated } from "react-spring";
+import {FaArrowCircleRight} from 'react-icons/fa'
 import "../styles/SlydingContainer.css";
 
 interface SlidingContainerProps {
   children: ReactElement<any, string | React.JSXElementConstructor<any>>[];
   style?: CSSProperties; //para conseguir definir o style do container
   styleSpaceBtween?: CSSProperties; //para conseguir definir o style do espaço entre os elementos filhos
+  styleChildrens?: CSSProperties; //para conseguir definir o style dos elementos filhos
+  className?: String;
+  classNameChildrens?: String;
 }
 
 const SlidingContainer = ({
   children,
   styleSpaceBtween,
-  style
+  style,
+  styleChildrens,
+  className,
+  classNameChildrens,
 }: SlidingContainerProps): ReactNode => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMouseDown, setIsMouseDown] = useState(false);
@@ -20,6 +27,20 @@ const SlidingContainer = ({
 
   if (!children) return null; //caso não tenha nenhum filho, retorna null
 
+  if(classNameChildrens){
+    children = React.Children.map(children, (child) => {
+      return React.cloneElement(child, {
+        className: classNameChildrens,
+      });
+    });
+  }
+  if(styleChildrens){
+    children = React.Children.map(children, (child) => {
+      return React.cloneElement(child, {
+        style: styleChildrens,
+      });
+    });
+  }
   // Adiciona um elemento vazio no inicio e no final da lista de filhos (não usado)
   //  const childrenArray =  React.Children.toArray(children) as ReactElement<any, string | React.JSXElementConstructor<any>>[];
   //   childrenArray[0] = React.cloneElement(childrenArray[0], {
@@ -88,25 +109,33 @@ const SlidingContainer = ({
   return (
     <div style={style}>
       <button
+        className="nextButton"
         style={{
           marginBottom: "8px",
           marginTop: "8px",
-          marginLeft: "80%",
-          width: "15%",
+          marginLeft: "95%",
+          aspectRatio: "1/1",
+          width: "40px",
+          borderRadius: "50%",
+          padding: "0px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
         onClick={handleButtonClick}
       >
-        Avançar 4 elementos
+        <FaArrowCircleRight size={25} />
       </button>
       <animated.div
-        className="containerSlyding"
+        className={`containerSlyding ${className ? className : ""}`}
         ref={containerRef}
         onMouseDown={handleMouseDown}
         onMouseLeave={handleMouseLeave}
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
         style={{
-          width: "100%",
+          width: "auto",
+          height: "auto",
           overflow: "hidden",
           display: "flex",
           alignItems: "flex-start",
@@ -117,11 +146,16 @@ const SlidingContainer = ({
             {indx === 0 ? (
               <div
                 style={
-                  styleSpaceBtween ? styleSpaceBtween : { margin: "20px 10px" }
+                  styleSpaceBtween ? styleSpaceBtween : { margin: "0px 20px" }
                 }
               />
             ) : null}
-            {child} <div style={styleSpaceBtween ? styleSpaceBtween : { margin: "20px 10px" }} />
+            {child}{" "}
+            <div
+              style={
+                styleSpaceBtween ? styleSpaceBtween : { margin: "20px 20px" }
+              }
+            />
           </>
         ))}
       </animated.div>

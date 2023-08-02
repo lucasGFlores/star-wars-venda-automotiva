@@ -13,7 +13,6 @@ const EnderecoForm = ({
   pagina,
   setPagina,
 }: EnderecoFormProps): JSX.Element => {
-  document.body.classList.add("background-style");
 
   const formatCEP = (cep: string) => {
     // Lógica de formatação do CEP

@@ -6,6 +6,8 @@ import Pagamento from "./Pagamento";
 import EstrelasNavigator from "../components/EstrelasNavigator";
 
 const FormDeCompra = () => {
+  document.body.classList.add("background-style");
+
   const [pagina, setPagina] = useState(0);
   return (
     <>
