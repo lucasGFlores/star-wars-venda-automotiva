@@ -3,7 +3,7 @@ import "../styles/cardElement.css";
 import { CSSProperties } from "react";
 import sand from "../autImages/Sand Crawler.jpeg"
 import store from "../Controlers/ControlerForm";
-import {}
+import { Link } from "react-router-dom";
 const ElementoAutomovel = ({
   url,
   fabricante,
@@ -25,133 +25,139 @@ const ElementoAutomovel = ({
   style?: React.CSSProperties;
   className?: string;
 }) => {
- const animation = style?.MozAnimation
-  return (
-    <div
-      onClick={() => {
-        store.setAutomovelSelecionado({
-          fabricante,
-          nome,
-          modelo,
-          tipo,
-          velocidade,
-          preco,
-          url,
-        });
-        
-      }}
-      className={`card ${className ? className : ""}`}
-      style={{
-        position: "relative",
-        padding: "0",
-        
-      }}
-    >
-      <div className="bordered-shape">
-        <div
-          key={nome}
-          style={{
-            flexShrink: 0,
-            borderRadius: "17px",
-            height: "400px",
-            width: "350px",
-            marginTop: "15px",
-            textAlign: "center",
-            paddingLeft: "0",
-            ...style,
-          }}
-        >
-          <img
-            style={{ marginTop: "5px", borderRadius: "15px",marginLeft:"2px" }}
-            src={sand}
-            width={"190px"}
-            height={"90px"}
-          />
-          <div style={{ width: "290px", marginTop: "7px", marginLeft: "14px" }}>
-            <p
-              style={{
-                width: "80%",
-                overflow: "hidden",
-                whiteSpace: "pre-wrap",
-                marginTop: "18px",
-                wordBreak: "normal",
-                color: "#534B62",
-                fontWeight: "bold",
-                margin: "auto",
-                fontSize: "15px",
-                marginBottom: "0",
-              }}
-            >
-              {fabricante}
-            </p>
-            <p
-              style={{
-                color: "#DDD4EF",
-                fontWeight: "bold",
-                fontSize: `${nome.length > 23 ? "22px" : "24px"}`,
-                margin: "0",
-              }}
-            >
-              {nome}
-            </p>
-            <p
-              style={{
-                fontWeight: "bold",
-                color: "#BFAFE0",
-                margin: "0",
-              }}
-            >
-              {modelo}
-            </p>
 
-            <div
+  return (
+    <Link to={"/tudo"}>
+      <div
+        onClick={() => {
+          store.setAutomovelSelecionado({
+            fabricante,
+            nome,
+            modelo,
+            tipo,
+            velocidade,
+            preco,
+            url,
+          });
+        }}
+        className={`card ${className ? className : ""}`}
+        style={{
+          position: "relative",
+          padding: "0",
+        }}
+      >
+        <div className="bordered-shape">
+          <div
+            key={nome}
+            style={{
+              flexShrink: 0,
+              borderRadius: "17px",
+              height: "400px",
+              width: "350px",
+              marginTop: "15px",
+              textAlign: "center",
+              paddingLeft: "0",
+              ...style,
+            }}
+          >
+            <img
               style={{
-                display: "flex",
-                flexDirection: "column",
-                marginTop: "8px",
+                marginTop: "5px",
+                borderRadius: "15px",
+                marginLeft: "2px",
               }}
+              src={sand}
+              width={"190px"}
+              height={"90px"}
+            />
+            <div
+              style={{ width: "290px", marginTop: "7px", marginLeft: "14px" }}
             >
               <p
                 style={{
-                  marginTop: "10px",
+                  width: "80%",
+                  overflow: "hidden",
+                  whiteSpace: "pre-wrap",
+                  marginTop: "18px",
+                  wordBreak: "normal",
+                  color: "#534B62",
                   fontWeight: "bold",
-                  fontSize: "25px",
-                  color: "#CFBFF3",
                   margin: "auto",
+                  fontSize: "15px",
+                  marginBottom: "0",
                 }}
               >
-                {tipo}
+                {fabricante}
               </p>
               <p
                 style={{
-                  marginTop: "10px",
+                  color: "#DDD4EF",
                   fontWeight: "bold",
-                  fontSize: "25px",
-                  color: "#CFBFF3",
-                  margin: "auto",
+                  fontSize: `${nome.length > 23 ? "22px" : "24px"}`,
+                  margin: "0",
                 }}
               >
-                {`${velocidade}/km`}
+                {nome}
+              </p>
+              <p
+                style={{
+                  fontWeight: "bold",
+                  color: "#BFAFE0",
+                  margin: "0",
+                }}
+              >
+                {modelo}
+              </p>
+
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  marginTop: "8px",
+                }}
+              >
+                <p
+                  style={{
+                    marginTop: "10px",
+                    fontWeight: "bold",
+                    fontSize: "25px",
+                    color: "#CFBFF3",
+                    margin: "auto",
+                  }}
+                >
+                  {tipo}
+                </p>
+                <p
+                  style={{
+                    marginTop: "10px",
+                    fontWeight: "bold",
+                    fontSize: "25px",
+                    color: "#CFBFF3",
+                    margin: "auto",
+                  }}
+                >
+                  {`${velocidade}/km`}
+                </p>
+              </div>
+              <p
+                style={{
+                  textAlign: "center",
+                  marginTop: "0px",
+                  fontWeight: "bold",
+                  fontSize: "30px",
+                  color: "#F3BA3E",
+                }}
+              >
+                {preco === "unknown" ? "90.000" : `${preco}`}
               </p>
             </div>
-            <p
-              style={{
-                textAlign: "center",
-                marginTop: "0px",
-                fontWeight: "bold",
-                fontSize: "30px",
-                color: "#F3BA3E",
-              }}
-            >
-              {preco === "unknown" ? "90.000" : `${preco}`}
-            </p>
           </div>
         </div>
+        <div className="colorLine" id="l1" />
+        <div className="colorLine" id="l2" />
+        <div className="colorLine" id="l3" />
       </div>
-      <div className="colorLine" id="l1" />
-      <div className="colorLine" id="l2" />
-      <div className="colorLine" id="l3" />
-    </div>
+    </Link>
   );
 };
 export default ElementoAutomovel;

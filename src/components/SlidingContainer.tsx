@@ -105,6 +105,14 @@ const SlidingContainer = ({
       behavior: "smooth",
     });
   };
+  const keyCreator = () : string => {
+        const listname = React.Children.map(children, (child) => {
+          return child.key;
+        });
+        listname.join(",");
+        return `${listname}${childrenWidth().qntChildren.toString}`;
+     
+  }
 
   return (
     <div style={style}>
@@ -128,6 +136,7 @@ const SlidingContainer = ({
         <FaArrowCircleRight size={24} />
       </button>
       <animated.div
+      key={keyCreator()}
         className={`containerSlyding ${className ? className : ""}`}
         ref={containerRef}
         onMouseDown={handleMouseDown}

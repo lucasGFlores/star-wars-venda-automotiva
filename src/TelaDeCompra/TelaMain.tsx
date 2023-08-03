@@ -24,27 +24,11 @@ const Tela = observer(() => {
       <img className="logo" src={logo} />
       {store.automoveis.length > 0 ? (
  <CampoDeBusca className={"campoDeBusca"} />
+
       ) : ("")}
      
 
-      {/* <div
-        style={{
-          width: "100%",
-          margin: "auto",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: "30px",
-        }}
-      >
-        <div className="card" style={{maxWidth:"300px", maxHeight:"400px",position:"relative",padding:"0"}}>
-          <div className="bordered-shape">bababa</div>
-          <div className="colorLine" id="l1" />
-          <div className="colorLine" id="l2" />
-          <div className="colorLine" id="l3" />
-        </div>
-      </div> */}
-
+  
       {store.buscarAutomoveis().length > 0 ? (
         <>
           <SlidingContainer>
@@ -54,7 +38,7 @@ const Tela = observer(() => {
                   animation: `aparecer ${index * 720}ms ease-in-out`,
                 }}
                 key={automovel.url}
-                url={automovel.url}
+                url={automovel.nome}
                 fabricante={automovel.fabricante}
                 nome={automovel.nome}
                 modelo={automovel.modelo}

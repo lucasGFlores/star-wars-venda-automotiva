@@ -4,10 +4,11 @@ import InfoCompradorForm from "./InfoCompradorForm";
 import EnderecoForm from "./EnderecoForm";
 import Pagamento from "./Pagamento";
 import EstrelasNavigator from "../components/EstrelasNavigator";
+import store from "../Controlers/ControlerForm";
 
 const FormDeCompra = () => {
   document.body.classList.add("background-style");
-
+console.log(store.automovelSelecionado)
   const [pagina, setPagina] = useState(0);
   return (
     <>
