@@ -44,7 +44,7 @@ const Pagamento = ({pagina,setPagina} : EnderecoFormProps) => {
         </nav>
 
         {view === "boleto" ? (
-          <PagamentoBoleto />
+          <PagamentoBoleto setPagina={setPagina} />
         ) : (
           <div style={{ margin: "8px 40px" }}>
             <PagamentoCartao pagina={pagina} setPagina={setPagina} />

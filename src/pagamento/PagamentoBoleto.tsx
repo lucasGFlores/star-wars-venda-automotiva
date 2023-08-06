@@ -1,5 +1,8 @@
 import qrcode from "../image/qrcode.png";
-const PagamentoBoleto = () => {
+ interface pagamentoBoletoProps {
+   setPagina: React.Dispatch<React.SetStateAction<number>>;
+ }
+const PagamentoBoleto = ({setPagina} : pagamentoBoletoProps) => {
     return (
       <div style={{ width: "447px", height: "408", margin: "30px" }}>
         <div
@@ -14,6 +17,7 @@ const PagamentoBoleto = () => {
           <img style={{ margin: "10px" }} src={qrcode} width={200}></img>
         </div>
         <button
+        onClick={() => setPagina((pagina) => pagina+1)}
           style={{ width: "160px", height: "40px", padding: "5px" }}
           className="select"
         >

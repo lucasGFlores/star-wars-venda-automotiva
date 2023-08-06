@@ -71,7 +71,7 @@ const PagamentoCartao = ({pagina,setPagina}: PagamentoCartaoProps) => {
                 />
               </div>
               <Field
-                style={{ width: "65px" }}
+                style={{ width: "75px" }}
                 name="validade"
                 label="validade"
                 type="text"
@@ -83,7 +83,7 @@ const PagamentoCartao = ({pagina,setPagina}: PagamentoCartaoProps) => {
               />
             </div>
             <div style={{ display: "flex" }}>
-              <div style={{ marginRight: "50px" }}>
+              <div style={{ marginRight: "30px" }}>
                 <Field
                   name="name"
                   label="Nome impresso no cartão"
@@ -92,7 +92,7 @@ const PagamentoCartao = ({pagina,setPagina}: PagamentoCartaoProps) => {
                 />
               </div>
               <Field
-                style={{ width: "45px" }}
+                style={{ width: "75px" }}
                 name="cvv"
                 label="CVV"
                 type="text"

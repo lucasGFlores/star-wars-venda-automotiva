@@ -13,7 +13,6 @@ class TelaMain extends Component {
     await store.fetherAutomovel();
   }
   render() {
-    console.log(store.automovelSelecionado);
     return <Tela />;
   }
 }
