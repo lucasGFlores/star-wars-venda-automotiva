@@ -1,4 +1,11 @@
-.backGround{
-    background-image: linear-gradient(45deg, #ff0 0%, #f0f 100%);
-    background-color: red;
+.backGround {
+  background-image: linear-gradient(
+    180deg,
+    #720e53,
+    #570c2c ,
+    #310618 ,
+    #240412 ,
+    #16020A,
+    #25171a
+  );
 }

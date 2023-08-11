@@ -1,14 +1,16 @@
 import CampoDeBusca from "./CampoDeBusca";
 import "../styles/CampoDeBusca.css";
+import "../styles/TelaMain.css";
 import SlidingContainer from "../components/SlidingContainer";
 import ElementoAutomovel from "./ElementoAutomovel";
 import store from "../Controlers/ControlerForm";
 import { observer } from "mobx-react";
 import { Component } from "react";
+import { CardInsa } from "../components/cardInsa";
 class TelaMain extends Component {
-
   componentWillMount() {
     store.fetherAutomovel();
+    console.lo;
   }
   render() {
     return <Tela />;
@@ -16,7 +18,7 @@ class TelaMain extends Component {
 }
 const Tela = observer(() => {
   document.body.classList.add("backGround");
-  console.log(store.automoveis);
+  console.log(store.automoveis.map((automovel) => automovel.nome));
   return (
     <>
       <CampoDeBusca />
@@ -26,10 +28,21 @@ const Tela = observer(() => {
           width: "100%",
         }}
       >
-        {store.buscarAutomoveis().length > 0 ? (
-          
+        <CardInsa />
+        {store.buscarAutomoveis().map((automovel, ind) => {
+          if(ind !== 0 ) return
+          return <ElementoAutomovel
+            key={automovel.url}
+            fabricante={automovel.fabricante}
+            nome={automovel.nome}
+            modelo={automovel.modelo}
+            tipo={automovel.tipo}
+            velocidade={automovel.velocidade}
+            preco={automovel.preco}
+          />
+        })}
+        {/* {store.buscarAutomoveis().length ? (
           <SlidingContainer style={{ marginTop: "30px" }}>
-            
             {store.buscarAutomoveis().map((automovel) => (
               <ElementoAutomovel
                 key={automovel.url}
@@ -42,7 +55,7 @@ const Tela = observer(() => {
               />
             ))}
           </SlidingContainer>
-        ) : !(store.filtro.length > 0) ? (
+        ) : store.filtro.length === 0 ? (
           <div style={{ textAlign: "center", marginTop: "200px" }}>
             <h1>Carregando...</h1>
           </div>
@@ -52,7 +65,7 @@ const Tela = observer(() => {
               Não existe esse automóvel que busca :( {"\n"} Tente novamente
             </h1>
           </div>
-        )}
+        )} */}
       </div>
     </>
   );
