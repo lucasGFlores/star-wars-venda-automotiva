@@ -20,14 +20,15 @@ const Tela = observer(() => {
 
   return (
     <>
-      <img className="logo" src={logo} />
-      {store.automoveis.length > 0 ? (
- <CampoDeBusca className={"campoDeBusca"} />
+      <div style={{ marginBottom:"60px", marginTop:"-50px" }}>
+        <img className="logo" src={logo} />
+        {store.automoveis.length > 0 ? (
+          <CampoDeBusca className={"campoDeBusca"} />
+        ) : (
+          ""
+        )}
+      </div>
 
-      ) : ("")}
-     
-
-  
       {store.buscarAutomoveis().length > 0 ? (
         <>
           <SlidingContainer>
