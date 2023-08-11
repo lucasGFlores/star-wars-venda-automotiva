@@ -51,6 +51,19 @@ const ElementoAutomovel = ({
    "Sail barge":
      "https://cdn.thisiswhyimbroke.com/images/vintage-star-wars-jabba-sail-barge-640x533.jpg",
  };
+
+ 
+  const formatpreco  = () : string => {
+    const formatpreco = preco.match(/^(\d{2,3})(\d{3})$/);
+
+    if (formatpreco) {
+      console.log(formatpreco);
+      const format = formatpreco[1] + "." + formatpreco[2];
+      return format;
+    }
+    return preco;
+  };
+
   return (
     <Link to={"/tudo"}>
       <div
@@ -173,7 +186,7 @@ const ElementoAutomovel = ({
                   color: "#F3BA3E",
                 }}
               >
-                {preco === "unknown" ? "90.000" : `${preco}`}
+                {preco === "unknown" ? "90.000" : `${formatpreco()}`}
               </p>
             </div>
           </div>
