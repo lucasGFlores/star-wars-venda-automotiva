@@ -6,10 +6,10 @@
 
 .bordered-shape {
   margin: 0 auto;
-  width: 320px;
-  aspect-ratio: 3/4;
+  width: 365px;
+  aspect-ratio: 3/4.2;
   background: #1c1720;
-  clip-path: polygon(25% 0%, 120% -20%, 100% 65%, 75% 100%, -20% 120%, 0 35%);
+  clip-path: polygon(20% 0%, 120% -20%, 100% 65%, 85% 100%, -20% 120%, 0 35%);
   border-radius: 20px;
   position: relative;
   overflow: hidden;
@@ -30,6 +30,7 @@
   position: absolute;
   animation: move 7s infinite linear;
   opacity: 0;
+  
   transition:  800ms;
 }
 
@@ -46,9 +47,9 @@
 
 .bordered-shape::after {
   content: "";
-  width: 300px;
-  aspect-ratio: 3/4;
-  clip-path: polygon(25% 0%, 100% 0, 100% 65%, 75% 100%, 0 100%, 0 35%);
+  width: 340px;
+  aspect-ratio: 3/4.2;
+  clip-path: polygon(20% 0%, 100% 0, 100% 65%, 85% 100%, 0 100%, 0 35%);
   left: 10px;
   top: 12px;
   position: absolute;

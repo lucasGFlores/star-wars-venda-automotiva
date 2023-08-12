@@ -2,8 +2,7 @@ import t16 from "../autImages/T-16_skyhopper_-_SW_20.webp";
 import tbomber from "../autImages/TIE_Bomber.webp";
 import sandCrawler from "../autImages/Sand Crawler.jpeg";
 import "../styles/cardElement.css";
-import { CSSProperties } from "react";
-import sand from "../autImages/Sand Crawler.jpeg"
+import credito from "../image/credito.png"
 import store from "../Controlers/ControlerForm";
 import { Link } from "react-router-dom";
 const ElementoAutomovel = ({
@@ -57,7 +56,6 @@ const ElementoAutomovel = ({
     const formatpreco = preco.match(/^(\d{2,3})(\d{3})$/);
 
     if (formatpreco) {
-      console.log(formatpreco);
       const format = formatpreco[1] + "." + formatpreco[2];
       return format;
     }
@@ -100,16 +98,16 @@ const ElementoAutomovel = ({
           >
             <img
               style={{
-                marginTop: "5px",
+                marginTop: "20px",
                 borderRadius: "15px",
-                marginLeft: "2px",
+                marginLeft: "65px",
               }}
               src={imageList[nome]}
-              width={"190px"}
-              height={"90px"}
+              width={"270px"}
+              height={"155px"}
             />
             <div
-              style={{ width: "290px", marginTop: "7px", marginLeft: "14px" }}
+              style={{ width: "290px", marginTop: "15px", marginLeft: "45px" }}
             >
               <p
                 style={{
@@ -131,7 +129,7 @@ const ElementoAutomovel = ({
                 style={{
                   color: "#DDD4EF",
                   fontWeight: "bold",
-                  fontSize: `${nome.length > 23 ? "22px" : "24px"}`,
+                  fontSize: `${nome.length > 23 ? "24px" : "30px"}`,
                   margin: "0",
                 }}
               >
@@ -142,11 +140,11 @@ const ElementoAutomovel = ({
                   fontWeight: "bold",
                   color: "#BFAFE0",
                   margin: "0",
+                  fontSize: "20px",
                 }}
               >
                 {modelo}
               </p>
-
               <div
                 style={{
                   display: "flex",
@@ -154,7 +152,7 @@ const ElementoAutomovel = ({
                   marginTop: "8px",
                 }}
               >
-                <p
+                {/* <p
                   style={{
                     marginTop: "10px",
                     fontWeight: "bold",
@@ -175,19 +173,28 @@ const ElementoAutomovel = ({
                   }}
                 >
                   {`${velocidade}/km`}
-                </p>
+                </p> */}
               </div>
-              <p
+              <div
                 style={{
-                  textAlign: "center",
-                  marginTop: "0px",
-                  fontWeight: "bold",
-                  fontSize: "30px",
-                  color: "#F3BA3E",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  marginTop: "-20px",
                 }}
               >
-                {preco === "unknown" ? "90.000" : `${formatpreco()}`}
-              </p>
+                <img src={credito} height={"40px"}></img>
+                <p
+                  style={{
+                    textAlign: "center",
+                    fontWeight: "bold",
+                    fontSize: "50px",
+                    color: "#F3BA3E",
+                  }}
+                >
+                  {preco === "unknown" ? "90.000" : `${formatpreco()}`}
+                </p>
+              </div>
             </div>
           </div>
         </div>

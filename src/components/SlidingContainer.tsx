@@ -1,6 +1,12 @@
-import React, { CSSProperties, ReactElement, ReactNode, useRef, useState } from "react";
-import {  animated } from "react-spring";
-import {FaArrowCircleRight} from 'react-icons/fa'
+import React, {
+  CSSProperties,
+  ReactElement,
+  ReactNode,
+  useRef,
+  useState,
+} from "react";
+import { animated } from "react-spring";
+import { FaArrowCircleRight } from "react-icons/fa";
 import "../styles/SlydingContainer.css";
 
 interface SlidingContainerProps {
@@ -27,14 +33,14 @@ const SlidingContainer = ({
 
   if (!children) return null; //caso não tenha nenhum filho, retorna null
 
-  if(classNameChildrens){
+  if (classNameChildrens) {
     children = React.Children.map(children, (child) => {
       return React.cloneElement(child, {
         className: classNameChildrens,
       });
     });
   }
-  if(styleChildrens){
+  if (styleChildrens) {
     children = React.Children.map(children, (child) => {
       return React.cloneElement(child, {
         style: styleChildrens,
@@ -98,21 +104,18 @@ const SlidingContainer = ({
     if (!containerRef.current) return;
     let newScrollLeft =
       containerRef.current.scrollLeft + childrenWidth().widthFromOneChild * 4;
-    newScrollLeft =
-      newScrollLeft > containerRef.current.scrollWidth ? 0 : newScrollLeft;
     containerRef.current.scrollTo({
-      left: newScrollLeft,
+      left: newScrollLeft >= childrenWidth().widthFromAllChildren ? 0 : newScrollLeft,
       behavior: "smooth",
     });
   };
-  const keyCreator = () : string => {
-        const listname = React.Children.map(children, (child) => {
-          return child.key;
-        });
-        listname.join(",");
-        return `${listname}${childrenWidth().qntChildren.toString}`;
-     
-  }
+  const keyCreator = (): string => {
+    const listname = React.Children.map(children, (child) => {
+      return child.key;
+    });
+    listname.join(",");
+    return `${listname}${childrenWidth().qntChildren.toString}`;
+  };
 
   return (
     <div style={style}>
@@ -136,7 +139,7 @@ const SlidingContainer = ({
         <FaArrowCircleRight size={24} />
       </button>
       <animated.div
-      key={keyCreator()}
+        key={keyCreator()}
         className={`containerSlyding ${className ? className : ""}`}
         ref={containerRef}
         onMouseDown={handleMouseDown}
