@@ -1,21 +1,28 @@
 import { makeAutoObservable } from "mobx";
-class Automovel {
+export class Automovel {
   fabricante: string;
   nome: string;
   modelo: string;
   tipo: string;
   velocidade: string;
-  preco:string;
-  url:string;
+  preco: string;
+  tamanho: string;
+  qtgPilotos: string;
+  qtgPassageiros: string;
+  carga: string;
+  url: string;
   constructor(
     fabrica: string,
     nome: string,
     modelo: string,
     tipo: string,
     velocidade: string,
-  preco:string,
-  url:string
-
+    preco: string,
+    tamanho: string,
+    qtgPilotos: string,
+    qtgPassageiros: string,
+    carga: string,
+    url: string
   ) {
     this.fabricante = fabrica;
     this.nome = nome;
@@ -23,6 +30,10 @@ class Automovel {
     this.tipo = tipo;
     this.velocidade = velocidade;
     this.preco = preco;
+    this.tamanho = tamanho;
+    this.qtgPilotos = qtgPilotos;
+    this.qtgPassageiros = qtgPassageiros;
+    this.carga = carga;
     this.url = url;
 
     makeAutoObservable(this);
@@ -65,7 +76,11 @@ class Store {
           auto.model,
           auto.vehicle_class,
           auto.max_atmosphering_speed,
-          auto.cost_in_credits,
+          auto.cost_in_credits !== "unknown" ? auto.cost_in_credits : "90000",
+          auto.length + " Metros",
+          auto.crew,
+          auto.passengers,
+          auto.cargo_capacity !== "none" ? auto.cargo_capacity + " Kg" : "none",
           auto.url
         )
       );
@@ -75,13 +90,17 @@ class Store {
   // componentWillMount() {
   //   store.fetherAutomovel();
   // }
-   setAutomovelSelecionado({
+  setAutomovelSelecionado({
     fabricante,
     nome,
     modelo,
     tipo,
     velocidade,
     preco,
+    tamanho,
+    qtgPilotos,
+    qtgPassageiros,
+    carga,
     url,
   }: {
     fabricante: string;
@@ -90,8 +109,12 @@ class Store {
     tipo: string;
     velocidade: string;
     preco: string;
+    tamanho: string;
+    qtgPilotos: string;
+    qtgPassageiros: string;
+    carga: string;
     url: string;
-  })  {
+  }) {
     this.automovelSelecionado = new Automovel(
       fabricante,
       nome,
@@ -99,10 +122,14 @@ class Store {
       tipo,
       velocidade,
       preco,
+      tamanho,
+      qtgPilotos,
+      qtgPassageiros,
+      carga,
       url
-      );
+    );
   }
 }
 
 const store = new Store();
-export default  store;
+export default store;

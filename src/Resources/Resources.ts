@@ -65,3 +65,12 @@ export const formatPhoneNumber = (value: string): string => {
       return cleanedCVV;
     }
   };
+    export const formatpreco = (preco : string): string => {
+      const formatpreco = preco.match(/^(\d{2,3})(\d{3})$/);
+
+      if (formatpreco) {
+        const format = formatpreco[1] + "." + formatpreco[2];
+        return format;
+      }
+      return preco;
+    };

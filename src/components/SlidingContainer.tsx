@@ -103,7 +103,8 @@ const SlidingContainer = ({
   const handleButtonClick = () => {
     if (!containerRef.current) return;
     let newScrollLeft =
-      containerRef.current.scrollLeft + childrenWidth().widthFromOneChild * 4;
+      containerRef.current.scrollLeft + (childrenWidth().widthFromOneChild+20) * 3;
+      console.log(containerRef.current.scrollLeft)
     containerRef.current.scrollTo({
       left: newScrollLeft >= childrenWidth().widthFromAllChildren ? 0 : newScrollLeft,
       behavior: "smooth",
