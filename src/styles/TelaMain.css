@@ -1,11 +1,86 @@
-.backGround {
-  background-image: linear-gradient(
-    180deg,
+.background-style {
+  -webkit-mask-image: linear-gradient(
+    to bottom,
     #720e53,
-    #570c2c ,
-    #310618 ,
-    #240412 ,
-    #16020A,
-    #25171a
+    #570c2c,
+    #310618,
+    #240412,
+    #16020a
   );
+
+  background-image: url(../image/espaco10.jpg);
+  animation: aparecer 0.1s ease-in-out;
+  background-repeat: no-repeat;
+  overflow: visible;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  
+}
+.loading {
+  padding: 25px;
+  outline: 3px solid white;
+  outline-offset: 15px;
+  background-color: black;
+  border-radius: 20px;
+  animation: 2.5s loadingtransition infinite ease-in-out;
+}
+.logoLoading {
+  margin: 20px auto;
+  animation: 2.5s logoRotation infinite linear;
+}
+.logo {
+  margin: 8px;
+ width: auto;
+ height: 53px;
+ padding: 0;
+}
+.logo:hover{
+  box-shadow: 0px 0px 10000px 8px rgb(169, 14, 14);
+}
+.campoDeBusca{
+  animation: aparecer 1.5s ease-in-out;
+}
+.itensCarrosel{
+  animation: aparecer 0.5s ease-in-out;
+}
+@keyframes aparecer {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes loadingtransition {
+  0% {
+    outline-offset: -18px;
+    outline-color: gold;
+
+    box-shadow: 0px 0px 3px 3px goldenrod, 0px 0px 6px 6px rgb(169, 14, 14);
+    /* background-color: rgb(128, 11, 11); */
+  }
+
+  40% {
+    outline-offset: 22px;
+    outline-color: white;
+    background-color: black;
+    box-shadow: 0px 0px 4px 5px white;
+  }
+
+  100% {
+    outline-offset: -18px;
+    outline-color: gold;
+    box-shadow: 0px 0px 3px 3px goldenrod, 0px 0px 6px 6px rgb(169, 14, 14);
+    /* background-color: rgb(128, 11, 11); */
+  }
+}
+@keyframes logoRotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

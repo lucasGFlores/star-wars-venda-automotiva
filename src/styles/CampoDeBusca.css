@@ -1,3 +1,6 @@
+body {
+  background-color: #1b1725;
+}
 
 div#root {
   width: 100%;
@@ -12,6 +15,7 @@ input {
   outline: none;
 }
 .busca {
+  margin: 0;
   font-size: large;
   height: 30px;
   width: 100%;
@@ -31,3 +35,4 @@ input {
   border-radius: 12px;
   padding: 5px 10px;
 }
+

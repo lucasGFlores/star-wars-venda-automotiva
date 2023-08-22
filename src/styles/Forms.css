@@ -1,7 +1,6 @@
 .background-style {
- background-image: linear-gradient(45deg, #ff0 0%, #f0f 100%);
-	-webkit-mask-image: linear-gradient(to top, transparent 8%, rgb(0, 0, 0) 25%);
-	background-image: url(../image/spaceGradient.png);
+  -webkit-mask-image: linear-gradient(to top, transparent 8%, rgb(0, 0, 0) 25%);
+  background-image: url(../image/spaceGradient.png);
 }
 .container {
   max-width: max-content;
@@ -44,10 +43,8 @@ input {
   padding: 5px;
   padding-left: 8px;
   border-radius: 12px;
-  border: 3px solid #c287ae;
-  outline: none;
+  border: 2px solid #c287ae;
 }
-
 
 input:focus {
   border-color: #bf7481;
@@ -61,15 +58,15 @@ p.error {
   font-size: small;
   text-align: center;
   border-radius: 5px;
-
   word-break: break-all;
 }
+
 .select {
   width: 70px;
   height: 30px;
   margin-top: 35px;
   background-color: #44346d;
-  border: 3px solid #c287ae;
+  border: 2px solid #c287ae;
   border-radius: 12px;
   text-align: center;
 }
@@ -79,7 +76,10 @@ p.error {
   border: 3px solid #bf7481;
 }
 button.select:hover {
-  outline-offset: -10px;
+  outline: 3px solid #bf7481;
+ 
+  outline-offset: 5px;
+  transition: all 500ms;
 }
 .submit {
   background-color: #543a58;
@@ -87,4 +87,64 @@ button.select:hover {
   border-color: #c287ae;
   margin-top: 8px;
   width: 50%;
+}
+.fadeInP {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  animation: fadeInP 800ms ease-in-out;
+}
+@keyframes fadeInP {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 4px;
+    margin-bottom: 4px;
+  }
+}
+@keyframes aparecer {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* CSS para a animação de entrada */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* CSS para a animação de saída */
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* Classe para animação de entrada */
+.fadeIn {
+  animation: fadeIn 2s ease-in-out;
+}
+
+/* Classe para animação de saída */
+.fadeOut {
+  animation: fadeOut 1s ease-in-out;
 }

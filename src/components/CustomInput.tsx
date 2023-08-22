@@ -25,11 +25,14 @@ const CustomInput: FC<CustomInputProps & FieldProps> = ({
         className={touched[field.name] && errors[field.name] ? "error" : ""}
       />
       {touched[field.name] && errors[field.name] ? (
-        <p style={{ textAlign: "center", padding:"2px 2px" }} className="error">
+        <p
+          style={{ textAlign: "center", padding: "2px 2px" }}
+          className="error fadeInP"
+        >
           {errors[field.name]?.toString()}
         </p>
       ) : (
-        ""
+   ""
       )}
     </div>
   );

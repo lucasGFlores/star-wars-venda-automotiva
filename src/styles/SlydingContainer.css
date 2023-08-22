@@ -17,3 +17,8 @@
 ::-ms-scrollbar {
   width: 0.5rem; /* Largura do scrollbar */
 }
+
+.nextButton:hover{
+  box-shadow: 0 0 5px 5px white;
+  transition: 720ms;
+}
