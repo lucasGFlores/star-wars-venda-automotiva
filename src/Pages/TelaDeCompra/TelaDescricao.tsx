@@ -6,6 +6,7 @@ import "../../styles/TelaDescricao.css";
 import yoda from "../../image/babyYodaSad.png";
 import store from "../../Controlers/ControlerForm";
 import { formatpreco } from "../../Resources/Resources";
+import { Link } from "react-router-dom";
 const telaDescricao = () => {
   document.body.classList.add("background-style");
 
@@ -121,21 +122,23 @@ const telaDescricao = () => {
                 margin: "0",
               }}
             >
-             {formatpreco(auto?.preco) ?? "???"}
+              {formatpreco(auto?.preco) ?? "???"}
             </p>
           </div>
-          <button
-            style={{
-              borderRadius: "25px",
-              backgroundColor: "#8652AF",
-              height: "25%",
-              aspectRatio: "2/1",
-              fontSize: "30px",
-              marginTop: "calc(20% + 20px)",
-            }}
-          >
-            Comprar
-          </button>
+          <Link to={"/tudo"}>
+            <button
+              style={{
+                borderRadius: "25px",
+                backgroundColor: "#8652AF",
+                height: "25%",
+                aspectRatio: "2/1",
+                fontSize: "30px",
+                marginTop: "calc(20% + 20px)",
+              }}
+            >
+              Comprar
+            </button>
+          </Link>
         </div>
       </div>
     </div>
